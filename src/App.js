@@ -1,26 +1,34 @@
+import { connect } from 'react-redux';
+import { addPlayers, fetchPlayers } from './redux/actions';
+import PlayersTable from './players/players-table';
 import React from 'react';
-import logo from './logo.svg';
+import SearchForm from './search/search-form'
 import './App.css';
 
-function App() {
+function App(props) {
+  props.fetchPlayers();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Football Player Finder</h1>
+      <SearchForm />
+      <PlayersTable playersList={props.players}/>
     </div>
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    players: state.players
+  };
+}
+
+const mapDispatchToProps = {
+  addPlayers,
+  fetchPlayers
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
