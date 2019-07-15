@@ -1,32 +1,64 @@
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import React from 'react';
+import positions from './positions';
+import React, { useState } from 'react';
+import connect from "react-redux/es/connect/connect";
+import { applyFilters } from "../redux/actions";
 
-function SearchForm() {
+function SearchForm(props) {
+  const [name, setName] = useState("");
+  const [position, setPosition] = useState("Position");
+  const [age, setAge] = useState("");
+
+  const renderPositions = function () {
+    return positions.map((position, index) =>{
+      return (
+          <option key={index} value={position}>{position}</option>
+      );
+    })
+  };
+
+  const handleSearchSubmit = async function (event) {
+    event.preventDefault();
+
+    const filters = {
+      name: name,
+      position: position,
+      age: age
+    };
+
+    props.applyFilters(filters);
+  };
+
   return (
-        <Form>
+        <Form onSubmit={handleSearchSubmit.bind(this)}>
           <Form.Row>
             <Col>
-              <Form.Control type="text" placeholder="Player Name" />
+              <Form.Control
+                  type="text"
+                  placeholder="Player Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+              />
             </Col>
             <Col>
-              <Form.Control as="select">
-                <option>Position</option>
-                <option>Attacking Midfield</option>
-                <option>Central Midfield</option>
-                <option>Centre-Back</option>
-                <option>Centre-Forward</option>
-                <option>Defensive Midfield</option>
-                <option>Keeper</option>
-                <option>Left Midfield</option>
-                <option>Left Wing</option>
-                <option>Left-Back</option>
-                <option>Right-Back</option>
+              <Form.Control
+                  as="select"
+                  value={position}
+                  onChange={(e) => setPosition(e.target.value)}
+              >
+                <option disabled>Position</option>
+                {renderPositions()}
               </Form.Control>
             </Col>
             <Col>
-              <Form.Control type="number" placeholder="Age" />
+              <Form.Control
+                  type="number"
+                  placeholder="Age"
+                  value={age}
+                  onChange={(e) => {setAge(e.target.value)}}
+              />
             </Col>
             <Col xs lg="2">
               <Button variant="primary" type="submit">
@@ -38,4 +70,17 @@ function SearchForm() {
   );
 }
 
-export default SearchForm;
+function mapStateToProps(state) {
+  return {
+    filters: state.filters
+  };
+}
+
+const mapDispatchToProps = {
+  applyFilters
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SearchForm);

@@ -1,6 +1,10 @@
 const initialState = {
   players: [],
-  filters: {}
+  filters: {
+    name: "",
+    position: "Position",
+    age: ""
+  }
 };
 
 function reducer(state = initialState, action) {

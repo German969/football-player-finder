@@ -4,17 +4,21 @@ const getPlayers = (state) => state.players;
 const getFilters = (state) => state.filters;
 
 function applyFilters (filters, players) {
-  filters.forEach(function (filter) {
-    switch (filter.name) {
-      case 'name':
-        return players.filter(player => player.name.includes(filter.value));
-      case 'position':
-        return players.filter(player => player.position === filter.value);
-      case 'age':
-        return players.filter(player => player.age === filter.value);
-      default:
-        return players
-    }
+  const filtersToApply = {
+    name: filters.name !== "",
+    position: (filters.position !== "Position" && filters.position !== "All"),
+    age: filters.age !== ""
+  };
+
+  return players.filter(player => {
+    return (
+        (!filtersToApply.name ||
+            (filtersToApply.name && player.name.includes(filters.name))) &&
+        (!filtersToApply.position ||
+            (filtersToApply.position && player.position === filters.position)) &&
+        (!filtersToApply.age ||
+            (filtersToApply.age && player.age === parseInt(filters.age)))
+    );
   });
 }
 

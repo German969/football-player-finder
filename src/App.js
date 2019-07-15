@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import { addPlayers, fetchPlayers } from './redux/actions';
+import { getFilteredPlayers } from './redux/selectors';
 import PlayersTable from './players/players-table';
 import React from 'react';
-import SearchForm from './search/search-form'
+import SearchForm from './search/search-form';
 import './App.css';
 
 function App(props) {
@@ -19,7 +20,7 @@ function App(props) {
 
 function mapStateToProps(state) {
   return {
-    players: state.players
+    players: getFilteredPlayers(state)
   };
 }
 
