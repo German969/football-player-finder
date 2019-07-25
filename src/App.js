@@ -6,12 +6,12 @@ import React from 'react';
 import SearchForm from './search/search-form';
 import './App.css';
 
-function App(props) {
+export function App(props) {
   props.fetchPlayers();
 
   return (
     <div className="App">
-      <h1>Football Player Finder</h1>
+      <h1 className="App-title">Football Player Finder</h1>
       <SearchForm />
       <PlayersTable playersList={props.players}/>
     </div>

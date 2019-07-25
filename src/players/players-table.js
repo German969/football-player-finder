@@ -16,7 +16,7 @@ function PlayersTable({playersList}) {
   };
 
   return (
-      <Table striped bordered>
+      <Table className="players-table" striped bordered>
         <thead>
         <tr>
           <th>Player</th>

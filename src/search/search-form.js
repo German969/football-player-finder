@@ -3,10 +3,11 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import positions from './positions';
 import React, { useState } from 'react';
-import connect from "react-redux/es/connect/connect";
-import { applyFilters } from "../redux/actions";
+import { connect } from 'react-redux';
+import { applyFilters } from '../redux/actions';
+import './search-form.css';
 
-function SearchForm(props) {
+export function SearchForm(props) {
   const [name, setName] = useState("");
   const [position, setPosition] = useState("Position");
   const [age, setAge] = useState("");
@@ -19,7 +20,7 @@ function SearchForm(props) {
     })
   };
 
-  const handleSearchSubmit = async function (event) {
+  const handleSearchSubmit = function (event) {
     event.preventDefault();
 
     const filters = {
@@ -32,7 +33,7 @@ function SearchForm(props) {
   };
 
   return (
-        <Form onSubmit={handleSearchSubmit.bind(this)}>
+        <Form className="search-form" onSubmit={handleSearchSubmit.bind(this)}>
           <Form.Row>
             <Col>
               <Form.Control
