@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addPlayers, fetchPlayers } from './redux/actions';
+import { fetchPlayers } from './redux/actions';
 import { getFilteredPlayers } from './redux/selectors';
 import PlayersTable from './players/players-table';
 import React from 'react';
@@ -25,7 +25,6 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  addPlayers,
   fetchPlayers
 };
 
