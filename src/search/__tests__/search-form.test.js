@@ -5,19 +5,19 @@ import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import 'babel-polyfill';
 
-jest.mock("../positions", () => (
-    ["testPos1", "testPos2"]
+jest.mock('../positions', () => (
+    ['testPos1', 'testPos2']
 ), { virtual: true });
 
-describe("Search Form", () => {
+describe('Search Form', () => {
   Enzyme.configure({ adapter: new Adapter() });
 
   function SearchFormSetup() {
     const SearchFormProps = {
       filters: {
-        name: "",
-        position: "Position",
-        age: ""
+        name: '',
+        position: 'Position',
+        age: ''
       },
       applyFilters: jest.fn()
     };
@@ -32,54 +32,54 @@ describe("Search Form", () => {
 
   const { SearchFormWrapper, SearchFormProps } = SearchFormSetup();
 
-  const form = SearchFormWrapper.find("Form");
-  const formControls = SearchFormWrapper.find("FormControl");
+  const form = SearchFormWrapper.find('Form');
+  const formControls = SearchFormWrapper.find('FormControl');
   const playerNameFormControl = formControls.at(0);
   const positionFormControl = formControls.at(1);
   const ageFormControl = formControls.at(2);
-  const button = SearchFormWrapper.find("Button");
+  const button = SearchFormWrapper.find('Button');
 
-  it("should render form controls with default props", () => {
-    expect(form.hasClass("search-form")).toBeTruthy();
+  it('should render form controls with default props', () => {
+    expect(form.hasClass('search-form')).toBeTruthy();
     expect(formControls).toHaveLength(3);
     expect(playerNameFormControl.props()).toMatchObject({
-      type: "text",
-      placeholder: "Player Name",
-      value: ""
+      type: 'text',
+      placeholder: 'Player Name',
+      value: ''
     });
     expect(positionFormControl.props()).toMatchObject({
-      as: "select",
-      value: "Position"
+      as: 'select',
+      value: 'Position'
     });
     expect(ageFormControl.props()).toMatchObject({
-      type: "number",
-      placeholder: "Age",
-      value: ""
+      type: 'number',
+      placeholder: 'Age',
+      value: ''
     });
     expect(button.props()).toMatchObject({
-      variant: "primary",
-      type: "submit"
+      variant: 'primary',
+      type: 'submit'
     });
-    expect(button.text()).toBe("Search");
+    expect(button.text()).toBe('Search');
   });
 
-  it("should render positions options", () => {
-    const options = SearchFormWrapper.find("option");
+  it('should render positions options', () => {
+    const options = SearchFormWrapper.find('option');
 
     expect(options.length).toBe(3);
-    expect(options.at(0).props()).toHaveProperty("disabled");
-    expect(options.at(0).text()).toBe("Position");
-    expect(options.at(1).props()).toHaveProperty("value", "testPos1");
-    expect(options.at(1).text()).toBe("testPos1");
-    expect(options.at(2).props()).toHaveProperty("value", "testPos2");
-    expect(options.at(2).text()).toBe("testPos2");
+    expect(options.at(0).props()).toHaveProperty('disabled');
+    expect(options.at(0).text()).toBe('Position');
+    expect(options.at(1).props()).toHaveProperty('value', 'testPos1');
+    expect(options.at(1).text()).toBe('testPos1');
+    expect(options.at(2).props()).toHaveProperty('value', 'testPos2');
+    expect(options.at(2).text()).toBe('testPos2');
   });
 
   describe('when changing input values', () => {
-    const form = SearchFormWrapper.find("form");
-    const inputs = SearchFormWrapper.find("input");
+    const form = SearchFormWrapper.find('form');
+    const inputs = SearchFormWrapper.find('input');
     const playerNameInput = inputs.at(0);
-    const positionInput = SearchFormWrapper.find("select");
+    const positionInput = SearchFormWrapper.find('select');
     const ageInput = inputs.at(1);
 
     it('should handle player name change', () => {
@@ -89,18 +89,18 @@ describe("Search Form", () => {
     });
 
     it('should handle position change', () => {
-      positionInput.simulate("change", { target: { value: 'testPos2' } });
+      positionInput.simulate('change', { target: { value: 'testPos2' } });
 
       expect(positionInput.instance().value).toBe('testPos2');
     });
 
     it('should handle age change', () => {
-      ageInput.simulate("change", { target: { value: 10 } });
+      ageInput.simulate('change', { target: { value: 10 } });
 
-      expect(ageInput.instance().value).toBe("10");
+      expect(ageInput.instance().value).toBe('10');
     });
 
-    it("should apply filters when submitting form", () => {
+    it('should apply filters when submitting form', () => {
       const mockName = 'testName';
       const mockPosition = 'testPos2';
       const mockAge = 10;
@@ -110,11 +110,11 @@ describe("Search Form", () => {
         age: mockAge
       };
 
-      playerNameInput.simulate("change", { target: { value: mockName } });
-      positionInput.simulate("change", { target: { value: mockPosition } });
-      ageInput.simulate("change", { target: { value: mockAge } });
+      playerNameInput.simulate('change', { target: { value: mockName } });
+      positionInput.simulate('change', { target: { value: mockPosition } });
+      ageInput.simulate('change', { target: { value: mockAge } });
 
-      form.simulate("submit");
+      form.simulate('submit');
 
       expect(SearchFormProps.applyFilters).toHaveBeenCalledWith(expectedFilters);
     });

@@ -25,8 +25,8 @@ describe('App', () => {
     const { AppWrapper } = AppSetup();
     const PlayersTableProps = AppWrapper.find('PlayersTable').props();
 
-    expect(AppWrapper.find('div').hasClass('App')).toBe(true);
-    expect(AppWrapper.find('h1').hasClass('App-title')).toBe(true);
+    expect(AppWrapper.find('div').hasClass('App')).toBeTruthy();
+    expect(AppWrapper.find('h1').hasClass('App-title')).toBeTruthy();
     expect(AppWrapper.find('h1').text()).toBe('Football Player Finder');
     expect(PlayersTableProps.playersList).toEqual([]);
   });
