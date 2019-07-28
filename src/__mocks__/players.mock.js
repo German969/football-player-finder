@@ -20,5 +20,27 @@ module.exports = [
   "jerseyNumber": 20,
   "name": "Sergio Romero",
   "nationality": "Argentina",
-  "position": "Keeper"}
-]
+  "position": "Keeper"
+  },{
+    "contractUntil" : "2019-06-30",
+    "dateOfBirth" : "1995-12-05",
+    "jerseyNumber" : 11,
+    "name" : "Anthony Martial",
+    "nationality" : "France",
+    "position" : "Left Wing"
+  },{
+    "contractUntil" : "2022-06-30",
+    "dateOfBirth" : "1988-12-19",
+    "jerseyNumber" : 7,
+    "name" : "Alexis Sánchez",
+    "nationality" : "Chile",
+    "position" : "Left Wing"
+  },{
+    "contractUntil" : "2020-06-30",
+    "dateOfBirth" : "1988-08-01",
+    "jerseyNumber" : 31,
+    "name" : "Nemanja Matic",
+    "nationality" : "Serbia",
+    "position" : "Defensive Midfield"
+  }
+];

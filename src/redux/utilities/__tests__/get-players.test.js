@@ -7,7 +7,7 @@ jest.mock('moment', () => () => ({
   diff: () => 26
 }));
 
-describe.skip('get players', () => {
+describe('get players', () => {
   const players = [
       {
         name: 'TEST',

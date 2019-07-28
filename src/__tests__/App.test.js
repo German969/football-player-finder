@@ -39,10 +39,4 @@ describe('App', () => {
     expect(PlayersTableProps.playersList).toEqual([]);
     expect(getFilteredPlayers).toHaveBeenCalledTimes(1);
   });
-
-    it.skip('should call function to fetch players', () => {
-      const { AppProps } = AppSetup();
-
-      expect(AppProps.fetchPlayers.mock.calls.length).toBe(1);
-    });
 });
