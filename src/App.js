@@ -2,12 +2,16 @@ import { connect } from 'react-redux';
 import { fetchPlayers } from './redux/actions';
 import { getFilteredPlayers } from './redux/selectors';
 import PlayersTable from './players/players-table';
-import React from 'react';
+import React, { useEffect } from 'react';
 import SearchForm from './search/search-form';
 import './App.css';
 
 export function App(props) {
-  props.fetchPlayers();
+  const { fetchPlayers } = props;
+
+  useEffect( () => {
+    fetchPlayers();
+  }, [fetchPlayers]);
 
   return (
     <div className="App">
